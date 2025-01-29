@@ -27,12 +27,6 @@ if %errorlevel% neq 0 (
 set "CURRENT_DIR=%~dp0"
 echo %CURRENT_DIR%
 
-:: Create a virtual environment
-echo Creating virtual environment...
-python -m venv "%CURRENT_DIR%\venv"
-
-:: Activate the virtual environment
-call "%CURRENT_DIR%\venv\Scripts\activate.bat"
 
 :: Install required Python packages
 echo Installing required dependencies...
