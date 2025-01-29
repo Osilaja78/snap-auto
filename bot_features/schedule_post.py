@@ -10,12 +10,28 @@ from selenium.webdriver.support import expected_conditions as EC
 import schedule
 import time
 from datetime import datetime
+from utils import get_device_name, get_android_version
+import sys
+
+device_name = get_device_name()
+android_version = get_android_version()
+
+if not device_name:
+    print(device_name)
+    print("\n❌ Device not detected! Please make sure your phone is connected and USB debugging is enabled.")
+    print("👉 Steps to enable USB Debugging:\n1. Go to 'Settings' > 'About phone'\n2. Tap 'Build number' 7 times to enable Developer mode\n3. Go to 'Developer options' and enable 'USB Debugging'\n")
+    sys.exit(1)  # Exit the script
+
+# Check if Android version is detected
+if not android_version:
+    print("\n❌ Could not detect Android version. Make sure ADB is properly set up and your phone is connected.")
+    sys.exit(1)
 
 # Appium Desired Capabilities
 options = UiAutomator2Options().load_capabilities({
     "platformName": "Android",
-    "platformVersion": "10",
-    "deviceName": "4845395858364798",
+    "platformVersion": android_version,
+    "deviceName": device_name,
     "appActivity": "com.snapchat.android.LandingPageActivity",
     "appPackage": "com.snapchat.android",
     "autoGrantPermissions": True,
